@@ -11,9 +11,12 @@ from flask_gravatar import Gravatar
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, URL
+import secrets
+
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+secret_key = secrets.token_hex(16)
+app.config['SECRET_KEY'] = secret_key
 ckeditor = CKEditor(app)
 Bootstrap(app)
 login_manager = LoginManager()
@@ -21,7 +24,7 @@ login_manager.init_app(app)
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///C:\Users\Vladimír Prno\PycharmProjects\Blog4\blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
